@@ -5,6 +5,8 @@
     "category": "CRM",
     'currency': "USD",
     "license": "OPL-1",
+    'category': 'Extra Tools',
+    'live_test_url':'https://youtu.be/QOuly0C8Upc',
     'price': 30.00,
     "version": "14.0.1",
 
