@@ -11,6 +11,8 @@
     'license': 'LGPL-3',
     'images' : ['static/description/background.gif'],
     'depends' : ['base'],
+    'price':30.0,
+    'currency':'USD',
     'data': [
         'security/ir.model.access.csv',
          'views/menu.xml',
