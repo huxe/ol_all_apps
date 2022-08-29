@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="insta_token_access" model="ir.ui.view">
+        <field name="name">get.insta.form</field>
+        <field name="model">get.insta</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name='generate_token' type='object' class="oe_highlight" string="Generate Token" state="confirm" />
+                </header>
+                <group>
+                    <group>
+                    <field name="token" />
+                    <field  name='fb_page_id'/>
+                    <field  name='client_id'/>
+                    </group>
+                    <group>
+                    <field name="clinet_sec_id"/>
+                   
+                   
+
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id = "insta_comments_form"  model="ir.ui.view">
+        <field name="name" >insta.comment.form</field>
+        <field name="model">insta.comment</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="post_id" />
+                <field name="comment"/>
+            </form>
+
+        </field>
+    </record> -->
+
+    <record id="model_name_view_tree" model="ir.ui.view">
+        <field name="name">insta.comment.view.tree</field>
+        <field name="model">insta.comment</field>
+        <field name="arch" type="xml">
+            <tree  editable="bottom" >
+                
+                
+                <field name="comment"/>
+                <field name="username"/>
+                
+                <field name="com_id" invisible="1"/>
+                <field name="reply_comment"/>
+                <button name='com_reply' context="{'comid' : com_id, 'text': reply_comment}" type='object' string="Reply" class="oe_highlight"  />
+                   
+              
+            </tree>
+        </field>
+    </record>
+  
+
+
+      
+    <record id="generate_token_tree" model="ir.ui.view">
+        <field name="name">insta.credential.view.tree</field>
+        <field name="model">insta.credential</field>
+        <field name="arch" type="xml">
+            <tree string="">
+                <field name='long_token'/>
+                <field name='insta_acc_id'/>
+            </tree>
+        </field>
+    </record>
+
+
+    <record id="form_credent_insta" model="ir.actions.act_window">
+        <field name="name">Add New Instance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">get.insta</field>
+        <field name="view_mode">form,tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Instance Found
+            </p>
+        </field>
+    </record>
+    <record id="generate_token_tree" model="ir.actions.act_window">
+        <field name="name">Add New Instance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">insta.credential</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Instance Found
+            </p>
+        </field>
+    </record>
+
+    <record id="insta_comment" model="ir.actions.act_window">
+        <field name="name">Add New Instance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">insta.comment</field>
+        <field name="view_mode">tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Instance Found
+            </p>
+        </field>
+    </record>
+
+
+
+
+    <menuitem id="insta_menu" name="Generate Token" 
+    sequence="6" parent="insta_integrate.SocialMedia_root" action="form_credent_insta" />
+
+    <menuitem id="insta_menu_item" name="Long Access Token" 
+    sequence="7" parent="insta_integrate.SocialMedia_root" action="generate_token_tree" />
+
+    <menuitem id="insta_menu_comment" name="Comments" 
+    sequence="8" parent="insta_integrate.SocialMedia_root" action="insta_comment" />
+
+
+</odoo>

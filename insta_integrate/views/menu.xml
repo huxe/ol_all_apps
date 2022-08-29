@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    
+    <record id="view_report_volume_summery_form" model="ir.ui.view">
+        <field name="name">insta.post.form</field>
+        <field name="model">insta.post</field>
+        <field name="arch" type="xml">
+            <form>
+                
+                <group>
+                    <group string="POST">
+                        <field name="id"/>
+                        <field name="postid" />
+                        <feild name="permlink"/>
+                        <field name="caption"/>
+                        <field name="media_type"/>
+                        
+                        
+                    </group>
+                    <group>
+                        <group>
+                            
+                            <field name="postimage"  widget='image' class="oe_avatar"  />
+                        </group>
+                    
+                    
+                    
+                    
+                </group>
+                </group>
+                <notebook>
+                    <page name="comments" string="Comments">
+                       
+                        <tree>
+                        
+                        <field name="comment" />
+                        
+                    </tree>    
+                    </page>
+                </notebook>
+                
+            </form>
+            
+        </field>
+    </record> 
+
+    
+
+    <record id="view_report_volume_summery_kanban" model="ir.ui.view">
+        <field name="name">insta.post.kanban</field>
+        <field name="model">insta.post</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <templates>
+                    <t t-name="kanban-box" action="view_mysql_main">
+                        
+                        <div t-attf-class="oe_kanban_card oe_kanban_global_click ">
+                            
+                            <div class='o_kanban_image'>
+                                <field name="postimage" widget='image' attrs="{'invisible': [('media_type', '=', 'VIDEO')], 'required': [('media_type', '=', 'IMAGE')]}" />
+                                <!-- <field name="id"/>    -->
+                               
+                               <!-- <img class="o_kanban_image_inner_pic" 
+                                       t-att-src="kanban_image('insta.post' , postimage, record.id.raw_value)" /> -->
+                               
+                           </div> 
+                           
+                            <div class="o_kanban_record_top mb16" style="text-align: left; margin-top: 40px:;">
+                                <strong class="o_kanban_record_title">
+                                    
+
+                                    <field name="postid" />
+                                    
+                                    
+
+                                </strong>
+                            </div>
+                            <div class="oe_kanban_bottom_left text-muted mr5 mb20 " style="margin-left: 40px:; text-align: center; ">
+                                <span >
+                                    <br></br>
+                                    <br></br>
+                                <p  ><field name="caption"/></p>
+                                </span>
+                                <span>
+                                    <field name="media_type"/>
+                                </span>
+                            </div>
+                            
+                            
+
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+            
+        </field>    
+    </record>
+
+
+
+
+    <record id="form_credent" model="ir.actions.act_window">
+        <field name="name">Add New Instance</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">insta.post</field>
+        <field name="view_mode">kanban,form,tree</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No Instance Found
+            </p>
+        </field>
+    </record>
+
+    
+
+    
+
+   
+
+    <menuitem id="SocialMedia_root"
+              name="Instagram "
+              web_icon = "insta_integrate,static/description/insta_icon2.png"
+              sequence="5" action="form_credent" />
+
+   
+                    <!-- post schedular  -->
+              <record id="cron_Sync" model="ir.cron">
+                <field name="name">Insta Action</field>
+                <field name="user_id" ref="base.user_root"/>
+                <field name="model_id" ref="model_insta_post"></field>
+                <field name="state">code</field>
+                <field name="code">model.getPost()</field>
+                <field name='interval_number'>5</field>
+                <field name='interval_type'>minutes</field>
+                <field name="numbercall">-1</field>
+                <field name="doall" eval="False"/>
+             </record>
+
+             <!-- comment schedular -->
+             <record id="comment_Sync" model="ir.cron">
+                <field name="name">Comments Action</field>
+                <field name="user_id" ref="base.user_root"/>
+                <field name="model_id" ref="model_insta_comment"></field>
+                <field name="state">code</field>
+                <field name="code">model.get_Comment()</field>
+                <field name='interval_number'>5</field>
+                <field name='interval_type'>minutes</field>
+                <field name="numbercall">-1</field>
+                <field name="doall" eval="False"/>
+             </record>
+
+             <!-- generate_token -->
+             <record id="token_refresh" model="ir.cron">
+                <field name="name">Token refresh</field>
+                <field name="user_id" ref="base.user_root"/>
+                <field name="model_id" ref="model_get_insta"></field>
+                <field name="state">code</field>
+                <field name="code">model.generate_token()</field>
+                <field name='interval_number'>1</field>
+                <field name='interval_type'>months</field>
+                <field name="numbercall">-1</field>
+                <field name="doall" eval="False"/>
+             </record>
+
+
+
+
+
+
+
+
+             <!-- <record id="comment_Sync" model="ir.cron">
+                <field name="name">Comment Action</field>
+                <field name="user_id" ref="base.user_root"/>
+                <field name="model_id" ref="model_helpdesk_ticket"></field>
+                <field name="state">code</field>
+                <field name="code">model.comment()</field>
+                <field name='interval_number'>1</field>
+                <field name='interval_type'>minutes</field>
+                <field name="numbercall">-1</field>
+                <field name="doall" eval="False"/>
+             </record>  -->
+
+</odoo>

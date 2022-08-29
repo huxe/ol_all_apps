@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_insta_post,access.insta.post,model_insta_post,,1,1,1,1
+access_get_insta,access.get.insta,model_get_insta,,1,1,1,1
+access_insta_comment,access.insta.comment,model_insta_comment,,1,1,1,1
+access_insta_credential,access.insta.credential,model_insta_credential,,1,1,1,1
